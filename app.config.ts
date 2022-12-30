@@ -7,6 +7,7 @@ export default defineAppConfig({
       // Color Mode
       light: "ph:sun-duotone",
       dark: "ph:moon-duotone",
+      system: "ph:circle-half",
       // Socials
       github: "carbon:logo-github",
       twitter: "logos:twitter",

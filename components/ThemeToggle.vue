@@ -4,11 +4,14 @@ const colorMode = useColorMode()
 function onClick() {
   let newTheme
   switch (colorMode.preference) {
-    case "light":
-      newTheme = "dark"
+    case 'light':
+      newTheme = 'dark'
+      break
+    case 'dark':
+      newTheme = 'system'
       break
     default:
-      newTheme = "light"
+      newTheme = 'light'
       break
   }
   colorMode.preference = newTheme

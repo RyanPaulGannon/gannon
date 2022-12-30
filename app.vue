@@ -47,11 +47,12 @@ const toggleModal = () => {
           some personal projects.
           <br />
           <br />
-          I've a keen sporting interest, mostly for football, cricket and the
-          NFL.
+            
+          I've a keen sporting interest, mostly for ⚽️, 🏏 and the
+          NFL 🏈.
           <br />
           <br />
-          Some of my current projects include:
+          Some projects I'm working on:
           <br />
           <br />
           <div class="grid md:grid-cols-3 place-content-center text-center">
@@ -68,10 +69,10 @@ const toggleModal = () => {
               >M3tadata
             </NuxtLink>
             <NuxtLink
-              to="https://pending"
+              to="https://fcc-headerparser-api.azurewebsites.net/"
               target="_blank"
               class="p-1 hover:text-teal-300"
-              >T&A
+              >Node Server
             </NuxtLink>
           </div>
         </div>
