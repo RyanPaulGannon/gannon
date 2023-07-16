@@ -39,17 +39,16 @@ const toggleModal = () => {
         <h1 class="text-2xl">Ryan Paul Gannon</h1>
         <br />
         <div>
-          I'm Ryan Gannon, currently a freelance Software Developer and
-          Mechanical Engineer.
+          I'm Ryan Gannon, currently a freelance Software Developer at
+          <a href="https://orderio.me">Orderio</a>.
           <br />
           <br />
           You can find me contributing to Open Source on GitHub, and working on
           some personal projects.
           <br />
           <br />
-            
-          I've a keen sporting interest, mostly for ⚽️, 🏏 and the
-          NFL 🏈.
+
+          I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈.
           <br />
           <br />
           Some projects I'm working on:
