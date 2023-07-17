@@ -37,8 +37,7 @@ const toggleModal = () => {
         class="dark:text-white border-solid border-2 rounded border-sky-500 max-w-2xl px-4 py-10 m-auto bg-white dark:bg-slate-800 sm:px-8 sm:shadow"
       >
         <h1 class="text-2xl">Ryan Paul Gannon</h1>
-        <br />
-        <div>
+        <div class="pt-4">
           I'm Ryan Gannon, currently a freelance Software Developer at
           <a href="https://orderio.me">Orderio</a>.
 
