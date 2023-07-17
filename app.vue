@@ -41,19 +41,18 @@ const toggleModal = () => {
         <div>
           I'm Ryan Gannon, currently a freelance Software Developer at
           <a href="https://orderio.me">Orderio</a>.
-          <br />
-          <br />
-          You can find me contributing to Open Source on GitHub, and working on
-          some personal projects.
-          <br />
-          <br />
 
-          I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈.
-          <br />
-          <br />
-          Some projects I'm working on:
-          <br />
-          <br />
+          <div class="pt-4">
+            You can find me contributing to Open Source on GitHub, and working
+            on some personal projects.
+          </div>
+
+          <div class="pt-4">
+            I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈.
+          </div>
+
+          <div class="pt-4">Some projects I'm working on:</div>
+
           <div class="grid md:grid-cols-3 place-content-center text-center">
             <NuxtLink
               to="https://fcwesthoughton.co.uk"
@@ -62,10 +61,10 @@ const toggleModal = () => {
               >FC Westhoughton
             </NuxtLink>
             <NuxtLink
-              to="https://m3tadata.vercel.app"
+              to="https://merklin.xyz"
               target="_blank"
               class="p-1 hover:text-teal-300"
-              >M3tadata
+              >Merklin
             </NuxtLink>
             <NuxtLink
               to="https://fcc-headerparser-api.azurewebsites.net/"
