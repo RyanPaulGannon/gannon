@@ -10,6 +10,7 @@
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.6.7",
+    "@unocss/nuxt": "^0.53.6",
     "nuxt": "3.4.3",
     "nuxt-icon": "^0.1.8",
     "unocss": "^0.51.8"
