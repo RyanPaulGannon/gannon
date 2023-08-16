@@ -11,12 +11,12 @@
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.6.7",
     "@unocss/nuxt": "^0.53.6",
-    "nuxt": "3.4.3",
+    "nuxt": "3.6.5",
     "nuxt-icon": "^0.1.8",
     "unocss": "^0.51.8"
   },
   "dependencies": {
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "vue3-carousel": "^0.3.1"
   }
 }
