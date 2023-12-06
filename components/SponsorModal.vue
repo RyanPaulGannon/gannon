@@ -22,12 +22,6 @@ defineProps({
       <br />
       0x9B707cB77D0c2995Bd6D3B593ecabd39614acc88
       <div class="place-content-center">
-        <!-- <button
-          class="bg-blue-500 text-white"
-          @click.prevent="$emit('close-modal')"
-        >
-          Close
-        </button> -->
       </div>
     </div>
   </div>
