@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineEmits(["close-modal"])
+defineEmits(['close-modal'])
 defineProps({
   modalActive: {
     type: Boolean,
@@ -21,8 +21,6 @@ defineProps({
       <br />
       <br />
       0x9B707cB77D0c2995Bd6D3B593ecabd39614acc88
-      <div class="place-content-center">
-      </div>
     </div>
   </div>
 </template>

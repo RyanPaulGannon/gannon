@@ -3,20 +3,7 @@ const colorMode = useColorMode()
 </script>
 
 <template>
-  <div>
-    <ul>
-      <li
-        v-for="color of ['system', 'light', 'dark']"
-        :key="color"
-        :class="{
-          preferred: !$colorMode.unknown && color === $colorMode.preference,
-          selected: !$colorMode.unknown && color === $colorMode.value
-        }"
-      >
-        <component :is="`icon-${color}`" @click="$colorMode.preference = color" />
-      </li>
-    </ul>
-  </div>
+    <ColorModeIconLight />
 </template>
 
 <style scoped>
