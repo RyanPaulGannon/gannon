@@ -3,7 +3,7 @@ const colorMode = useColorMode()
 </script>
 
 <template>
-    <ColorModeIconLight />
+  <ColorModeIconLight />
 </template>
 
 <style scoped>
@@ -12,15 +12,18 @@ ul {
   padding: 0;
   margin: 0;
 }
+
 ul li {
   display: inline-block;
   padding: 5px;
 }
+
 p {
   margin: 0;
   padding-top: 5px;
   padding-bottom: 20px;
 }
+
 .feather {
   position: relative;
   top: 0px;
@@ -32,13 +35,16 @@ p {
   border-radius: 5px;
   transition: all 0.1s ease;
 }
+
 .feather:hover {
   top: -3px;
 }
+
 .preferred .feather {
   border-color: var(--color-primary);
   top: -3px;
 }
+
 .selected .feather {
   color: var(--color-primary);
 }

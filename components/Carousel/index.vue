@@ -22,12 +22,8 @@ function prev() {
         <!-- Navigation symbols within carousel item -->
         <span @click="prev" class="nav-symbol">&lt;</span>
         <template v-if="typeof carouselLinks[currentIndex] === 'object'">
-          <a 
-            class="item"
-            v-if="carouselLinks[currentIndex].url"
-            :href="carouselLinks[currentIndex].url"
-            :target="carouselLinks[currentIndex].target"
-          >
+          <a class="item" v-if="carouselLinks[currentIndex].url" :href="carouselLinks[currentIndex].url"
+            :target="carouselLinks[currentIndex].target">
             {{ carouselLinks[currentIndex].text }}
           </a>
         </template>
@@ -47,12 +43,15 @@ function prev() {
 
 .carousel-item {
   position: relative;
-  width: calc(100% - 20px); /* Considering 20px padding for the container */
-  min-height: 20px; /* Minimum height of 20 pixels */
+  width: calc(100% - 20px);
+  /* Considering 20px padding for the container */
+  min-height: 20px;
+  /* Minimum height of 20 pixels */
   border-radius: 15px;
   background-color: #f0f0f0;
   padding: 10px;
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  box-sizing: border-box;
+  /* Ensures padding is included in the width */
   /* Add any other styles you need */
 }
 
@@ -62,7 +61,8 @@ function prev() {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px; /* Adjust size as needed */
+  font-size: 20px;
+  /* Adjust size as needed */
   /* Add any other styles you need */
 }
 

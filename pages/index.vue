@@ -2,6 +2,7 @@
 const modalActive = ref(false)
 function toggleModal() {
   modalActive.value = !modalActive.value
+  return 'test'
 }
 </script>
 
@@ -9,14 +10,12 @@ function toggleModal() {
   <div h-screen bg-white dark:bg-black>
     <div pt-20>
       <div class="flex place-content-center">
-        <ButtonBar />
       </div>
     </div>
     <div p-1>
       <SponsorModal :modalActive="modalActive" @close-modal="toggleModal" />
       <div
-        class="dark:text-white border-solid border-2 rounded border-sky-500 max-w-2xl px-4 py-10 m-auto bg-white dark:bg-slate-800 sm:px-8 sm:shadow"
-      >
+        class="dark:text-white border-solid border-2 rounded border-sky-500 max-w-2xl px-4 py-10 m-auto bg-white dark:bg-slate-800 sm:px-8 sm:shadow">
         <h1 text="black 5xl hover:blue" fw100>Ryan Paul Gannon</h1>
         <div pt-4 text="black dark:red">
           Bonjour, I'm Ryan, enchanté! I'm a Full Stack Developer from
@@ -57,10 +56,12 @@ body {
   background-color: #fff;
   color: rgba(0, 0, 0, 0.8);
 }
+
 .dark-mode body {
   background-color: #091a28;
   color: #ebf4f1;
 }
+
 .sepia-mode body {
   background-color: #f1e7d0;
   color: #433422;
