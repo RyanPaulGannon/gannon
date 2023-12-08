@@ -19,31 +19,25 @@ function toggleModal() {
         <h1 text="black 5xl hover:blue" fw100>Ryan Paul Gannon</h1>
         <div pt-4 text="black dark:red">
           Bonjour, I'm Ryan, enchanté! I'm a Full Stack Developer from
-          Manchester, UK 🏴󠁧󠁢󠁥󠁮󠁧󠁿
+          🏴󠁧󠁢󠁥󠁮󠁧󠁿 Manchester, UK
           <br />
           Currently working at
           <a class="hover:text-blue" href="https://ekatree.com">Ekatree</a>.
 
           <br />
           <br />
-          You can find me contributing to Open Source on GitHub, and working on
+          You can find me contributing to Open Source on GitHub (with a particular interest in memory management and
+          Rust), and working on
           some personal projects ou apprendre le francais.
 
           <br />
           <br />
-          I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈.
+          I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈. I'll talk almost anything sport!
 
-          <div pt-4>Some projects I'm working on:</div>
+          <div pt-4>Some projects I'm working on/contributing to:</div>
 
-          <div class="grid md:grid-cols-3 place-content-center p-5 text-center">
-            <div class="md:col-span-1"></div>
-            <!-- Empty column for centering -->
-            <div class="md:col-span-1">
-              <Carousel />
-            </div>
-            <!-- Carousel centered in the second column -->
-            <div class="md:col-span-1"></div>
-            <!-- Empty column for centering -->
+          <div class="carousel-wrapper">
+            <Carousel />
           </div>
         </div>
       </div>
@@ -55,6 +49,13 @@ function toggleModal() {
 body {
   background-color: #fff;
   color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: full;
 }
 
 .dark-mode body {
