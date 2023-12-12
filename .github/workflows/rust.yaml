@@ -20,6 +20,7 @@ jobs:
 
       - name: Build project
         run: |
+          cargo install trunk
           cargo build --release
           rustup target add wasm32-unknown-unknown
           trunk build
