@@ -30,4 +30,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           working-directory: ./dist
-
+          args: --y
