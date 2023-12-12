@@ -1,0 +1,32 @@
+name: Rust Project Build and Deploy
+
+on:
+  push:
+    branches:
+      - rust  # Change to your Rust-specific branch name
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Build project
+        run: |
+          cargo build --verbose
+          rustup target add wasm32-unknown-unknown
+          trunk build
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}  # Replace with your Vercel token
+          working-directory: ./dist                  # Path to your build artifacts
+
