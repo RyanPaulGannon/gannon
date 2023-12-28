@@ -21,9 +21,8 @@ jobs:
       - name: Build project
         run: |
           cargo install trunk
-          cargo build --release
           rustup target add wasm32-unknown-unknown
-          trunk build
+          trunk build --release
 
       - name: Deploy to Vercel
         run: npx vercel --confirm -t ${{ secrets.VERCEL_TOKEN }} --prod ./dist
