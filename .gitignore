@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+dist
+target
+.env
+=======
 # Logs
 logs
 *.log
@@ -22,3 +27,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+>>>>>>> main

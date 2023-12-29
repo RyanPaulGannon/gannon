@@ -1,0 +1,29 @@
+name: Rust Project Build and Deploy
+
+on:
+  push:
+    branches:
+      - rust
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Build project
+        run: |
+          cargo install trunk
+          rustup target add wasm32-unknown-unknown
+          trunk build --release
+
+      - name: Deploy to Vercel
+        run: npx vercel --confirm -t ${{ secrets.VERCEL_TOKEN }} --prod ./dist
+
