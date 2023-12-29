@@ -3,7 +3,7 @@ name: Rust Project Build and Deploy
 on:
   push:
     branches:
-      - rust
+      - main
 
 jobs:
   build-and-deploy:
@@ -11,7 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
 
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
@@ -24,6 +27,12 @@ jobs:
           rustup target add wasm32-unknown-unknown
           trunk build --release
 
-      - name: Deploy to Vercel
-        run: npx vercel --confirm -t ${{ secrets.VERCEL_TOKEN }} --prod ./dist
+      - name: Deploy to Azure
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          action: "upload"
+          app_location: "."
+          api_location: ""
+          output_location: "dist"
+
 
