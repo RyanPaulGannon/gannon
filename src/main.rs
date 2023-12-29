@@ -9,22 +9,23 @@ fn main() {
 fn App() -> impl IntoView {
     view! {
         <style>{STYLE_SHEET}</style>
-        <div>
+        <div id="main">
             <h1>"Ryan Paul Gannon"</h1>
 
-            <div>
+            <div class="card">
                 <p>
                 "Bonjour, I'm Ryan, enchanté! I'm a Full Stack Developer from
                 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Manchester, UK"
                 <br />
                 "Currently working at "
-                    <a href="https://ekatree.com">Ekatree</a>.
+                    <a href="https://ekatree.com" target="_blank">Ekatree</a>.
                 </p>
 
-                <p>
-                "You can find me contributing to Open Source on GitHub (with a particular interest in memory management and "
-                "Rust), and working on"
-                "some personal projects ou apprendre le francais."
+                <p id="main-text">
+                "You can find me contributing to Open Source on "
+                    <a href="https://github.com/ryanpaulgannon" target="_blank">GitHub</a>
+                " (with a particular interest in memory management "
+                "and Rust), and working on some personal projects ou apprendre le francais."
                 </p>
 
                 <p>
