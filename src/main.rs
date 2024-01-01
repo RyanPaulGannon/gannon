@@ -1,7 +1,7 @@
 use leptos::*;
 
-mod hire;
-use hire::*;
+mod contact;
+use contact::*;
 
 turf::style_sheet!("src/main.scss");
 
@@ -12,7 +12,7 @@ fn main() {
             <div id="main">
                 <h1>"Ryan Paul Gannon"</h1>
 
-                <Hire />
+                <Contact />
                 <div class="card">
                     <p>
                     "Bonjour, I'm Ryan, enchanté! I'm a Full Stack Developer from
