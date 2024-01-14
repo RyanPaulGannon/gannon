@@ -1,3 +1,5 @@
+extern crate dotenv_codegen;
+
 #[cfg(feature = "ssr")]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
