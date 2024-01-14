@@ -1,0 +1,170 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media (prefers-color-scheme: light) {
+        color: #213547;
+        background-color: #ffffff;
+    }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+container {
+    display: flex;
+    align-items: center;
+    min-width: 100%;
+}
+
+nav {
+    min-width: 100%;
+    padding-top: 1.5em;
+    text-align: center;
+    margin: 0 auto;
+
+    a {
+        margin: 0 10px;
+
+        &.active {
+            color: purple;
+        }
+    }
+}
+
+main {
+    width: 100%;
+    padding-top: 1.5em;
+    text-align: center;
+
+    main-text {
+        margin: 0 auto;
+        width: 60%;
+    }
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+
+    &:hover {
+        color: #535bf2;
+    }
+
+    @media (prefers-color-scheme: light) {
+        &:hover {
+            color: #747bff;
+        }
+    }
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 0.7;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+
+    &:hover {
+        border-color: #646cff;
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    @media (prefers-color-scheme: light) {
+        background-color: #f9f9f9;
+    }
+}
+
+input[type="email"] {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    transition: border-color 0.25s;
+    color: #fff;
+}
+
+input[type="email"]:focus {
+    outline: none;
+    border-color: #646cff;
+}
+
+@media (prefers-color-scheme: light) {
+    input[type="email"] {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    input[type="email"] {
+        margin-bottom: 1em;
+    }
+}
+
+#calendar {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border-bottom: 1px solid #ccc;
+
+        li {
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+}
