@@ -19,12 +19,13 @@ RUN rustup target add wasm32-unknown-unknown
 # Make an /app dir, which everything will eventually live in
 RUN mkdir -p /app
 WORKDIR /app
+
+COPY .env .env
 COPY . .
 
 # Build the app
 RUN cargo leptos build --release -vv
 
-# FROM rustlang/rust:nightly-bullseye as runner
 FROM debian:buster-slim as runner
 
 # -- NB: update binary name from "leptos_start" to match your app name in Cargo.toml --
@@ -44,6 +45,7 @@ ENV LEPTOS_SITE_ROOT="site"
 ENV PORT 80
 EXPOSE 80
 
+RUN apt-get update && apt install -y openssl
 # -- NB: update binary name from "leptos_start" to match your app name in Cargo.toml --
 # Run the server
 ENTRYPOINT ["/app/gannon"]

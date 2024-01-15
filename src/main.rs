@@ -1,11 +1,14 @@
 extern crate dotenv_codegen;
+pub mod components;
+pub mod routes;
+
+use gannon::App;
 
 #[cfg(feature = "ssr")]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_files::Files;
     use actix_web::*;
-    use gannon::app::*;
     use leptos::*;
     use leptos_actix::{generate_route_list, LeptosRoutes};
 

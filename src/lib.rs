@@ -1,19 +1,75 @@
-pub mod app;
-use cfg_if::cfg_if;
+use leptos::*;
+use leptos_meta::*;
+use leptos_router::*;
 
-cfg_if! {
-if #[cfg(feature = "hydrate")] {
+mod components;
+mod routes;
+use components::{contact::*};
+use routes::{calendar::*, not_found::*, login::*};
 
-  use wasm_bindgen::prelude::wasm_bindgen;
 
-    #[wasm_bindgen]
-    pub fn hydrate() {
-      use app::*;
-      use leptos::*;
+#[component]
+pub fn App() -> impl IntoView {
+    provide_meta_context();
+    view! {
+        <Stylesheet id="leptos" href="/pkg/gannon.css"/>
 
-      console_error_panic_hook::set_once();
+        <Title text="Ryan Paul Gannon"/>
 
-      leptos::mount_to_body(App);
+        <div class="container">
+            <nav>
+                <h1>"Ryan Paul Gannon"</h1>
+                <a href="/">"Home"</a>
+                <a href="/calendar">"Calendar"</a>
+                <a href="/login">"Login"</a>
+            </nav>
+            <Router>
+            <main>
+                <Routes>
+                    <Route path="/" view=Index/>
+                    <Route path="/calendar" view=Calendar/>
+                    <Route path="/login" view=Login/>
+                </Routes>
+            </main>
+            </Router>
+        </div>
     }
 }
+
+#[component]
+pub fn Index() -> impl IntoView {
+    view! {
+        <div class="main">
+            <Contact />
+            <div class="card">
+                <p>
+                "Bonjour, I'm Ryan, enchanté! I'm a Full Stack Developer from
+                🏴󠁧󠁢󠁥󠁮󠁧󠁿 Manchester, UK"
+                <br />
+                "Currently working at "
+                    <a href="https://ekatree.com" target="_blank">Ekatree</a>.
+                </p>
+
+                <p class="main-text">
+                "You can find me contributing to Open Source on "
+                    <a href="https://github.com/ryanpaulgannon" target="_blank">GitHub</a>
+                " (with a particular interest in memory management "
+                "and Rust), and working on some personal projects ou apprendre le francais."
+                </p>
+
+                <p>
+                "I've a keen sporting interest, mostly for ⚽️, 🏏 and the NFL 🏈. I'll talk almost anything sport!"
+                </p>
+                // <p>"Some projects I'm working on/contributing to:"</p>
+            </div>
+        </div>
+    }
 }
+
+#[cfg(feature = "hydrate")] 
+pub fn hydrate() {
+    console_error_panic_hook::set_once();
+
+    leptos::mount_to_body(App);
+}
+
