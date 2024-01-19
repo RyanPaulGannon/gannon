@@ -1,6 +1,5 @@
 use leptos::*;
 
-/// 404 - Not Found
 #[component]
 pub fn NotFound() -> impl IntoView {
     // set an HTTP status code 404
@@ -21,4 +20,3 @@ pub fn NotFound() -> impl IntoView {
         <h1>"Not Found"</h1>
     }
 }
-

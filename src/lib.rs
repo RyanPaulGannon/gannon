@@ -4,9 +4,8 @@ use leptos_router::*;
 
 mod components;
 mod routes;
-use components::{contact::*};
-use routes::{calendar::*, not_found::*, login::*};
-
+use components::contact::*;
+use routes::{calendar::*, login::*, not_found::*};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -29,6 +28,7 @@ pub fn App() -> impl IntoView {
                     <Route path="/" view=Index/>
                     <Route path="/calendar" view=Calendar/>
                     <Route path="/login" view=Login/>
+                    <Route path="/*" view=NotFound/>
                 </Routes>
             </main>
             </Router>
@@ -66,10 +66,9 @@ pub fn Index() -> impl IntoView {
     }
 }
 
-#[cfg(feature = "hydrate")] 
+#[cfg(feature = "hydrate")]
 pub fn hydrate() {
     console_error_panic_hook::set_once();
 
     leptos::mount_to_body(App);
 }
-

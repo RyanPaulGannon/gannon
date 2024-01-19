@@ -11,4 +11,3 @@ pub fn Login() -> impl IntoView {
         </div>
     }
 }
-

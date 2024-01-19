@@ -1,9 +1,9 @@
-use chrono::{Local, TimeZone}; 
+use chrono::{Local, TimeZone};
 use leptos::*;
 
-use serde_json::Value;
 use dotenv::dotenv;
 use dotenv_codegen::dotenv;
+use serde_json::Value;
 
 #[component]
 pub fn Calendar() -> impl IntoView {
@@ -38,7 +38,10 @@ async fn fetch_weather(_i: i32) -> Result<(), ServerFnError> {
     let met_office_api_key = dotenv!("MET_OFFICE_API_KEY");
     let westhoughton_id: u32 = 354159;
 
-    let url = format!("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/{}?res=3hourly&key={}", westhoughton_id, met_office_api_key);
+    let url = format!(
+        "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/{}?res=3hourly&key={}",
+        westhoughton_id, met_office_api_key
+    );
 
     let response = reqwest::get(url).await?;
 
@@ -53,4 +56,3 @@ async fn fetch_weather(_i: i32) -> Result<(), ServerFnError> {
 
     Ok(())
 }
-
