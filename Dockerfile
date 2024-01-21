@@ -26,7 +26,7 @@ COPY . .
 # Build the app
 RUN cargo leptos build --release -vv
 
-FROM debian:buster-slim as final
+FROM debian:buster-slim as runner
 
 # Copy the server binary to the /app directory
 COPY --from=builder /app/target/release/gannon /app/
@@ -37,14 +37,15 @@ COPY --from=builder /app/target/site /app/site
 COPY --from=builder /app/Cargo.toml /app/
 WORKDIR /app
 
-# Set any required env variables and
+# Set any required env variables
 ENV RUST_LOG="info"
-ENV LEPTOS_SITE_ADDR="0.0.0.0:3000"
+ENV LEPTOS_SITE_ADDR="0.0.0.0:80"
 ENV LEPTOS_SITE_ROOT="site"
-ENV PORT 3000
-EXPOSE 3000
+# ENV PORT 3000
+# EXPOSE 3000
 
 RUN apt-get update && apt-get install -y openssl
+
 # Run the server
 ENTRYPOINT ["/app/gannon"]
 
