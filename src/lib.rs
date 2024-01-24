@@ -1,3 +1,4 @@
+use cfg_if::cfg_if;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
@@ -66,9 +67,18 @@ pub fn Index() -> impl IntoView {
     }
 }
 
-#[cfg(feature = "hydrate")]
-pub fn hydrate() {
-    console_error_panic_hook::set_once();
+cfg_if! {
+if #[cfg(feature = "hydrate")] {
 
-    leptos::mount_to_body(App);
+  use wasm_bindgen::prelude::wasm_bindgen;
+
+    #[wasm_bindgen]
+    pub fn hydrate() {
+      use leptos::*;
+
+      console_error_panic_hook::set_once();
+
+      leptos::mount_to_body(App);
+    }
+}
 }

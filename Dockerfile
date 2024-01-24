@@ -41,8 +41,6 @@ WORKDIR /app
 ENV RUST_LOG="info"
 ENV LEPTOS_SITE_ADDR="0.0.0.0:80"
 ENV LEPTOS_SITE_ROOT="site"
-# ENV PORT 3000
-# EXPOSE 3000
 
 RUN apt-get update && apt-get install -y openssl
 
