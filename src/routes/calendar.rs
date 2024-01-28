@@ -1,38 +1,37 @@
-use chrono::{Datelike, Local};
+use chrono::{Datelike, Local, Month, TimeZone};
 use leptos::*;
 
 use dotenv::dotenv;
 use dotenv_codegen::dotenv;
 use serde_json::Value;
 
-fn display_month(month: u32) -> Option<&'static str> {
-    match month {
-        1 => Some("January"),
-        2 => Some("February"),
-        3 => Some("March"),
-        4 => Some("April"),
-        5 => Some("May"),
-        6 => Some("June"),
-        7 => Some("July"),
-        8 => Some("Aug"),
-        9 => Some("September"),
-        10 => Some("October"),
-        11 => Some("November"),
-        12 => Some("December"),
-        _ => None,
-    }
-}
-
 #[component]
 pub fn Calendar() -> impl IntoView {
-    // let (weather, _set_weather) = create_signal<String>(None);
+    // let (weather, _set_weather) = create_signal("".to_string());
     let date = Local::now();
+    let start_date = Local::with_ymd_and_hms(&Local, 2023, 1, 1, 0, 0, 0);
+    let month = Month::try_from(u8::try_from(date.month()).unwrap())
+        .ok()
+        .unwrap();
+
+    let mut previous_dates: Vec<u32> = Vec::new();
+    let mut following_dates: Vec<u32> = Vec::new();
+
+    for i in start_date.unwrap().day()..=date.day() {
+        previous_dates.push(i);
+    }
+
+    let days_in_month = days_in_month(date.year(), date.month());
+
+    for i in date.day() + 1..=days_in_month {
+        following_dates.push(i);
+    }
 
     view! {
         <div class="main">
             <div id="calendar">
                 <div id="year">
-                    { format!("{} {}", display_month(date.month()).unwrap(), date.year()) }
+                { format!("{:?} {:?}", month, date.year()) }
                         <ul class="calendar-header">
                             <li>"Mon"</li>
                             <li>"Tue"</li>
@@ -41,11 +40,33 @@ pub fn Calendar() -> impl IntoView {
                             <li>"Fri"</li>
                             <li>"Sat"</li>
                             <li>"Sun"</li>
-                            <li>{ format!("{:2}", date.day()) }</li>
+                            { previous_dates.into_iter().map(|day| {
+                                let today  = day == Local::now().day();
+                                let class_name = if today { "today" } else { "calendar-days" };
+                                    view! { <li class={class_name}>{ day }</li> }
+                            }).collect::<Vec<_>>()}
+                            { following_dates.into_iter().map(|day| {
+                                    view! { <li class="calendar-days">{ day }</li> }
+                            }).collect::<Vec<_>>()}
                         </ul>
                 </div>
             </div>
         </div>
+    }
+}
+
+fn days_in_month(year: i32, month: u32) -> u32 {
+    match month {
+        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+        4 | 6 | 9 | 11 => 30,
+        2 => {
+            if year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) {
+                29
+            } else {
+                28
+            }
+        }
+        _ => panic!("Invalid month"),
     }
 }
 
