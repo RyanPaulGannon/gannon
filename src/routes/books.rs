@@ -14,14 +14,24 @@ pub struct Book {
 
 #[component]
 pub fn Books() -> impl IntoView {
-    let books = vec![Book {
-        id: 1,
-        title: "Sapiens".to_string(),
-        author: "Yuval Noah Harari".to_string(),
-        rating: 9.5,
-        finished: true,
-        finish_date: NaiveDate::from_ymd_opt(2020, 5, 23),
-    }];
+    let books = vec![
+        Book {
+            id: 1,
+            title: "Sapiens".to_string(),
+            author: "Yuval Noah Harari".to_string(),
+            rating: 9.5,
+            finished: true,
+            finish_date: NaiveDate::from_ymd_opt(2020, 5, 23),
+        },
+        Book {
+            id: 2,
+            title: "Legacy".to_string(),
+            author: "James Kerr".to_string(),
+            rating: 7.0,
+            finished: true,
+            finish_date: NaiveDate::from_ymd_opt(2020, 6, 13),
+        },
+    ];
 
     view! {
         <div class="main">
@@ -33,6 +43,7 @@ pub fn Books() -> impl IntoView {
                             <p class="title">{book.title}</p>
                             <p class="author">by {book.author}</p>
                             <p class="rating">Rating: {book.rating}</p>
+                            <p class="finish_date">Finished: {format!("{:?}", book.finish_date.unwrap())}</p>
                         </div>
                     })
                 .collect_view()
