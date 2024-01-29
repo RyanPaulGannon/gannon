@@ -172,3 +172,25 @@ input[type="email"]:focus {
 .today {
     color: blue;
 }
+
+#books {
+    .book-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        .title {
+            font-weight: bold;
+        }
+
+        .author {
+            color: #666;
+        }
+
+        .rating {
+            color: green;
+            font-style: italic;
+        }
+    }
+}

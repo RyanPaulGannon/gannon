@@ -6,7 +6,7 @@ use leptos_router::*;
 mod components;
 mod routes;
 use components::contact::*;
-use routes::{calendar::*, login::*, not_found::*};
+use routes::{books::*, calendar::*, login::*, not_found::*};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -18,9 +18,9 @@ pub fn App() -> impl IntoView {
 
         <div class="container">
             <nav>
-                <h1>"Ryan Paul Gannon"</h1>
                 <a href="/">"Home"</a>
                 <a href="/calendar">"Calendar"</a>
+                <a href="/books">"Books"</a>
                 <a href="/login">"Login"</a>
             </nav>
             <Router>
@@ -29,6 +29,7 @@ pub fn App() -> impl IntoView {
                     <Route path="/" view=Index/>
                     <Route path="/calendar" view=Calendar/>
                     <Route path="/login" view=Login/>
+                    <Route path="/books" view=Books/>
                     <Route path="/*" view=NotFound/>
                 </Routes>
             </main>
@@ -40,6 +41,7 @@ pub fn App() -> impl IntoView {
 #[component]
 pub fn Index() -> impl IntoView {
     view! {
+        <h1>"Ryan Paul Gannon"</h1>
         <div class="main">
             <Contact />
             <div class="card">

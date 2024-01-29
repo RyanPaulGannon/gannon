@@ -1,3 +1,4 @@
+pub mod books;
 pub mod calendar;
-pub mod not_found;
 pub mod login;
+pub mod not_found;

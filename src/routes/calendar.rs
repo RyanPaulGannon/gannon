@@ -1,8 +1,7 @@
 use chrono::{Datelike, Local, Month, TimeZone};
-use leptos::*;
-
 use dotenv::dotenv;
 use dotenv_codegen::dotenv;
+use leptos::*;
 use serde_json::Value;
 
 #[component]
@@ -41,7 +40,7 @@ pub fn Calendar() -> impl IntoView {
                             <li>"Sat"</li>
                             <li>"Sun"</li>
                             { previous_dates.into_iter().map(|day| {
-                                let today  = day == Local::now().day();
+                                let today = day == Local::now().day();
                                 let class_name = if today { "today" } else { "calendar-days" };
                                     view! { <li class={class_name}>{ day }</li> }
                             }).collect::<Vec<_>>()}
@@ -52,6 +51,14 @@ pub fn Calendar() -> impl IntoView {
                 </div>
             </div>
         </div>
+
+        <button on:click=move |_| {
+            spawn_local(async {
+                let _ = book_slot("So much to do!".to_string()).await;
+            });
+        }>
+            "Book Slot"
+        </button>
     }
 }
 
@@ -70,8 +77,20 @@ fn days_in_month(year: i32, month: u32) -> u32 {
     }
 }
 
-#[server(GetWeather, "/weather", "GetJson")]
-async fn fetch_weather() -> Result<(), ServerFnError> {
+#[server(BookSlot, "/api", "url", "book")]
+pub async fn book_slot(event: String) -> Result<(), ServerFnError> {
+    // use actix_web::{cookie::Cookie, http::header, http::header::HeaderValue};
+    // use leptos_actix::ResponseOptions;
+
+    // let response = expect_context::<ResponseOptions>();
+
+    println!("{}", event);
+    Ok(())
+}
+
+#[server(GetWeather, "/api", "GetJson", "weather")]
+pub async fn get_weather() -> Result<(), ServerFnError> {
+    println!("testing weather");
     dotenv().ok();
 
     let met_office_api_key = dotenv!("MET_OFFICE_API_KEY");
