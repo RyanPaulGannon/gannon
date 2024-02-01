@@ -20,7 +20,6 @@ RUN rustup target add wasm32-unknown-unknown
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY .env .env
 COPY . .
 
 # Build the app
