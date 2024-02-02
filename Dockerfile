@@ -27,22 +27,19 @@ RUN cargo leptos build --release -vv
 
 FROM debian:buster-slim as runner
 
-# Copy the server binary to the /app directory
 COPY --from=builder /app/target/release/gannon /app/
-
-# /target/site contains our JS/WASM/CSS, etc.
 COPY --from=builder /app/target/site /app/site
-# Copy Cargo.toml if it’s needed at runtime
 COPY --from=builder /app/Cargo.toml /app/
+
 WORKDIR /app
 
-# Set any required env variables
 ENV RUST_LOG="info"
 ENV LEPTOS_SITE_ADDR="0.0.0.0:80"
 ENV LEPTOS_SITE_ROOT="site"
 
+ENV MET_OFFICE_API_KEY=$MET_OFFICE_API_KEY
+
 RUN apt-get update && apt-get install -y openssl
 
-# Run the server
 ENTRYPOINT ["/app/gannon"]
 

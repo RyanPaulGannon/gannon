@@ -70,17 +70,16 @@ pub fn Index() -> impl IntoView {
 }
 
 cfg_if! {
-if #[cfg(feature = "hydrate")] {
+    if #[cfg(feature = "hydrate")] {
+        use wasm_bindgen::prelude::wasm_bindgen;
 
-  use wasm_bindgen::prelude::wasm_bindgen;
+        #[wasm_bindgen]
+        pub fn hydrate() {
+            use leptos::*;
 
-    #[wasm_bindgen]
-    pub fn hydrate() {
-      use leptos::*;
+            console_error_panic_hook::set_once();
 
-      console_error_panic_hook::set_once();
-
-      leptos::mount_to_body(App);
+            leptos::mount_to_body(App);
+        }
     }
-}
 }

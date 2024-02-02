@@ -1,17 +1,27 @@
-use chrono::{Datelike, Local, Month, TimeZone};
-use dotenv::dotenv;
-use dotenv_codegen::dotenv;
-use leptos::*;
+use chrono::{Datelike, Local, Month, TimeZone, Weekday};
+use leptos::{leptos_dom::logging::console_log, logging::log, *};
 use serde_json::Value;
+use std::env;
 
 #[component]
 pub fn Calendar() -> impl IntoView {
     // let (weather, _set_weather) = create_signal("".to_string());
+    let weather_data = create_resource(|| (), |_| async move { get_weather().await });
+    log!("{:?}", weather_data);
+    console_log("Test");
+
     let date = Local::now();
     let start_date = Local::with_ymd_and_hms(&Local, 2023, 1, 1, 0, 0, 0);
     let month = Month::try_from(u8::try_from(date.month()).unwrap())
         .ok()
         .unwrap();
+    let days_in_month = days_in_month(date.year(), date.month());
+    let weekday = Weekday::num_days_from_monday(&Local::now().weekday());
+
+    let days_in_previous_month = match weekday {
+        0 => 6,
+        _ => weekday - 1,
+    };
 
     let mut previous_dates: Vec<u32> = Vec::new();
     let mut following_dates: Vec<u32> = Vec::new();
@@ -19,8 +29,6 @@ pub fn Calendar() -> impl IntoView {
     for i in start_date.unwrap().day()..=date.day() {
         previous_dates.push(i);
     }
-
-    let days_in_month = days_in_month(date.year(), date.month());
 
     for i in date.day() + 1..=days_in_month {
         following_dates.push(i);
@@ -39,6 +47,9 @@ pub fn Calendar() -> impl IntoView {
                             <li>"Fri"</li>
                             <li>"Sat"</li>
                             <li>"Sun"</li>
+                            { (0..days_in_previous_month).map(|_| {
+                                view! { <li></li> }
+                            }).collect::<Vec<_>>() }
                             { previous_dates.into_iter().map(|day| {
                                 let today = day == Local::now().day();
                                 let class_name = if today { "today" } else { "calendar-days" };
@@ -51,14 +62,14 @@ pub fn Calendar() -> impl IntoView {
                 </div>
             </div>
         </div>
-
-        <button on:click=move |_| {
-            spawn_local(async {
-                let _ = book_slot("So much to do!".to_string()).await;
-            });
-        }>
-            "Book Slot"
-        </button>
+        //
+        // <button on:click=move |_| {
+        //     spawn_local(async {
+        //         let _ = book_slot("So much to do!".to_string()).await;
+        //     });
+        // }>
+        //     "Book Slot"
+        // </button>
     }
 }
 
@@ -77,28 +88,16 @@ fn days_in_month(year: i32, month: u32) -> u32 {
     }
 }
 
-#[server(BookSlot, "/api", "url", "book")]
-pub async fn book_slot(event: String) -> Result<(), ServerFnError> {
-    // use actix_web::{cookie::Cookie, http::header, http::header::HeaderValue};
-    // use leptos_actix::ResponseOptions;
-
-    // let response = expect_context::<ResponseOptions>();
-
-    println!("{}", event);
-    Ok(())
-}
-
-#[server(GetWeather, "/api", "GetJson", "weather")]
+// #[server(GetWeather, "/api", "GetJson", "weather")]
 pub async fn get_weather() -> Result<(), ServerFnError> {
-    println!("testing weather");
-    dotenv().ok();
-
-    let met_office_api_key = dotenv!("MET_OFFICE_API_KEY");
+    let met_office_api_key = env::var("MET_OFFICE_API_KEY");
     let westhoughton_id: u32 = 354159;
+    // println!("{:?}", met_office_api_key);
 
     let url = format!(
         "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/{}?res=3hourly&key={}",
-        westhoughton_id, met_office_api_key
+        westhoughton_id,
+        met_office_api_key.unwrap()
     );
 
     let response = reqwest::get(url).await?;
@@ -106,7 +105,8 @@ pub async fn get_weather() -> Result<(), ServerFnError> {
     if response.status().is_success() {
         let body = response.text().await?;
         let json_data: Value = serde_json::from_str(&body)?;
-        println!("{:#?}", json_data);
+        // println!("{:#?}", json_data);
+        println!("Fetch success")
         // set_weather(json_data);
     } else {
         println!("Request failed with status code: {}", response.status());

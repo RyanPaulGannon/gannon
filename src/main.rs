@@ -1,4 +1,3 @@
-extern crate dotenv_codegen;
 pub mod components;
 pub mod routes;
 

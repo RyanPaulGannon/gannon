@@ -33,6 +33,9 @@ pub fn Books() -> impl IntoView {
         },
     ];
 
+    // let (book, set_books) = create_signal(Vec::<Book>::new());
+    // let data = create_resource(|| (), |()| async move { get_books().await });
+
     view! {
         <div class="main">
             <div id="books">
@@ -66,6 +69,8 @@ pub async fn get_books() -> Result<Vec<Book>, ServerFnError> {
     };
 
     books.push(book);
+
+    println!("{:#?}", books);
 
     Ok(books)
 }
