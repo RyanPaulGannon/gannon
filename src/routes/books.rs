@@ -70,7 +70,5 @@ pub async fn get_books() -> Result<Vec<Book>, ServerFnError> {
 
     books.push(book);
 
-    println!("{:#?}", books);
-
     Ok(books)
 }

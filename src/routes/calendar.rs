@@ -1,14 +1,12 @@
 use chrono::{Datelike, Local, Month, TimeZone, Weekday};
-use leptos::{leptos_dom::logging::console_log, logging::log, *};
-use serde_json::Value;
-use std::env;
+use leptos::*;
+// use serde_json::Value;
+// use std::env;
 
 #[component]
 pub fn Calendar() -> impl IntoView {
     // let (weather, _set_weather) = create_signal("".to_string());
-    let weather_data = create_resource(|| (), |_| async move { get_weather().await });
-    log!("{:?}", weather_data);
-    console_log("Test");
+    // let weather_data = create_resource(|| (), |_| async move { get_weather().await });
 
     let date = Local::now();
     let start_date = Local::with_ymd_and_hms(&Local, 2023, 1, 1, 0, 0, 0);
@@ -89,28 +87,27 @@ fn days_in_month(year: i32, month: u32) -> u32 {
 }
 
 // #[server(GetWeather, "/api", "GetJson", "weather")]
-pub async fn get_weather() -> Result<(), ServerFnError> {
-    let met_office_api_key = env::var("MET_OFFICE_API_KEY");
-    let westhoughton_id: u32 = 354159;
-    // println!("{:?}", met_office_api_key);
-
-    let url = format!(
-        "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/{}?res=3hourly&key={}",
-        westhoughton_id,
-        met_office_api_key.unwrap()
-    );
-
-    let response = reqwest::get(url).await?;
-
-    if response.status().is_success() {
-        let body = response.text().await?;
-        let json_data: Value = serde_json::from_str(&body)?;
-        // println!("{:#?}", json_data);
-        println!("Fetch success")
-        // set_weather(json_data);
-    } else {
-        println!("Request failed with status code: {}", response.status());
-    }
-
-    Ok(())
-}
+// pub async fn get_weather() -> Result<(), ServerFnError> {
+//     let met_office_api_key = env::var("MET_OFFICE_API_KEY");
+//     let westhoughton_id: u32 = 354159;
+//
+//     let url = format!(
+//         "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/{}?res=3hourly&key={}",
+//         westhoughton_id,
+//         met_office_api_key.unwrap()
+//     );
+//
+//     let response = reqwest::get(url).await?;
+//
+//     if response.status().is_success() {
+//         let body = response.text().await?;
+//         let _json_data: Value = serde_json::from_str(&body)?;
+//         // println!("{:#?}", json_data);
+//         println!("Fetch success")
+//         // set_weather(json_data);
+//     } else {
+//         println!("Request failed with status code: {}", response.status());
+//     }
+//
+//     Ok(())
+// }
