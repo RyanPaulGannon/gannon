@@ -20,16 +20,16 @@ pub fn App() -> impl IntoView {
             <nav>
                 <a href="/">"Home"</a>
                 <a href="/calendar">"Calendar"</a>
-                // <a href="/books">"Books"</a>
+                <a href="/books">"Books"</a>
                 // <a href="/login">"Login"</a>
             </nav>
             <Router>
             <main>
                 <Routes>
                     <Route path="/" view=Index/>
+                    <Route path="/books" view=Books/>
                     <Route path="/calendar" view=Calendar/>
                     // <Route path="/login" view=Login/>
-                    // <Route path="/books" view=Books/>
                     <Route path="/*" view=NotFound/>
                 </Routes>
             </main>

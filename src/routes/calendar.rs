@@ -7,6 +7,7 @@ use leptos::*;
 pub fn Calendar() -> impl IntoView {
     // let (weather, _set_weather) = create_signal("".to_string());
     // let weather_data = create_resource(|| (), |_| async move { get_weather().await });
+    // let (count, set_count) = create_signal(0);
 
     let date = Local::now();
     let start_date = Local::with_ymd_and_hms(&Local, 2023, 1, 1, 0, 0, 0);
@@ -58,6 +59,7 @@ pub fn Calendar() -> impl IntoView {
                             }).collect::<Vec<_>>()}
                         </ul>
                 </div>
+                // { count.get() }
             </div>
         </div>
         //
