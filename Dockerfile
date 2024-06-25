@@ -1,45 +1,52 @@
-# Get started with a build env with Rust nightly
-FROM rustlang/rust:nightly-bullseye as builder
+# Stage 1: Build stage
+FROM rust:1.79-slim-buster AS builder
 
-# If you’re using stable, use this instead
-# FROM rust:1.74-bullseye as builder
+WORKDIR /usr/src/gannon
 
-# Install cargo-binstall, which makes it easier to install other
-# cargo extensions like cargo-leptos
-RUN wget https://github.com/cargo-bins/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-musl.tgz
-RUN tar -xvf cargo-binstall-x86_64-unknown-linux-musl.tgz
-RUN cp cargo-binstall /usr/local/cargo/bin
+# Copy only the dependency manifests to cache dependencies
+COPY Cargo.lock Cargo.toml ./
 
-# Install cargo-leptos
-RUN cargo binstall cargo-leptos -y
+# Create the source directory and dummy main.rs to satisfy cargo build
+RUN mkdir src && \
+    echo "fn main() { println!(\"Dummy main function\") }" > src/main.rs && \
+    cargo build --release
 
-# Add the WASM target
-RUN rustup target add wasm32-unknown-unknown
-
-# Make an /app dir, which everything will eventually live in
-RUN mkdir -p /app
-WORKDIR /app
-
+# Copy the rest of the source code
 COPY . .
 
-# Build the app
-RUN cargo leptos build --release -vv
+# Build the application
+RUN cargo build --release
 
-FROM debian:buster-slim as runner
+# Stage 2: Runtime stage
+FROM debian:buster-slim
 
-COPY --from=builder /app/target/release/gannon /app/
-COPY --from=builder /app/target/site /app/site
-COPY --from=builder /app/Cargo.toml /app/
+WORKDIR /usr/src/gannon
 
-WORKDIR /app
+# Copy the built binary from the builder stage
+COPY --from=builder /usr/src/gannon/target/release/gannon /usr/src/gannon/gannon
 
-ENV RUST_LOG="info"
-ENV LEPTOS_SITE_ADDR="0.0.0.0:80"
-ENV LEPTOS_SITE_ROOT="site"
+EXPOSE 8080
 
-ENV MET_OFFICE_API_KEY=$MET_OFFICE_API_KEY
-
-RUN apt-get update && apt-get install -y openssl
-
-ENTRYPOINT ["/app/gannon"]
-
+ENTRYPOINT ["./gannon"]
+# FROM rust:1.79-slim-buster AS builder
+#
+# WORKDIR /usr/src/gannon
+#
+# COPY Cargo.lock Cargo.toml ./
+#
+# RUN mkdir src && cargo build --release
+#
+# COPY . .
+#
+# RUN cargo build --release
+#
+# FROM debian:buster-slim
+#
+# WORKDIR /usr/src/
+#
+# COPY --from=builder /usr/src/myapp/target/release/gannon /usr/src/gannon
+#
+# EXPOSE 8080 
+#
+# ENTRYPOINT ["./gannon"]
+#
